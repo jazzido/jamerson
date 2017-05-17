@@ -25,24 +25,26 @@ MIDI.loadPlugin({
 
 const NOTE_ON = 144;
 
-MIDI.Player.clearAnimation(); // clears current animation.
-MIDI.Player.setAnimation(function(data) {
-    // var now = data.now; // where we are now
-    // var end = data.end; // time when song ends
-    // var events = data.events; // all the notes currently being processed
-    //console.log('animation', data);
-//    console.log(data);
-  //  if (data.event.message === NOTE_ON) {
-    //    console.log('animation', data);
-    //}
-});
 
 var note_idx = 0;
 
 function play() {
     var chart = new Chart(MIDI.Player.data, MidiFile(MIDI.Player.currentData).header);
     
-    console.log('play this', this, MIDI);
+  MIDI.Player.clearAnimation(); // clears current animation.
+
+  /*MIDI.Player.setAnimation(function(data) {
+    // var now = data.now; // where we are now
+    // var end = data.end; // time when song ends
+    // var events = data.events; // all the notes currently being processed
+    //console.log('animation', data);
+    //    console.log(data);
+    if (data.event.message === NOTE_ON) {
+      chart.scrollLeft(data.now);
+    }
+  });*/
+
+
     MIDI.Player.addListener(function(data) { // set it to your own function!
         var now = data.now; // where we are now
         var end = data.end; // time when song ends
@@ -57,7 +59,9 @@ function play() {
         }
     });
 
-    MIDI.Player.start();
+    
+  MIDI.Player.start();
+  chart.startScroll();
 }
 MIDI.Player.BPM = null;
 MIDI.Player.loadFile('/static/midi/Textures2-Bass.mid', play, () => {}, (e) => console.log('error', e));
