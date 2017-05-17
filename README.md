@@ -4,6 +4,9 @@ A Javascript recreation of [Vulpeck's animated bass lines](https://www.youtube.c
 
 In progress.
 
+![cast](https://raw.githubusercontent.com/jazzido/jamerson/master/cast.gif)
+
+
 ## Installation
 
   - `yarn install`
